@@ -1,0 +1,132 @@
+[build-system]
+requires = [
+    "setuptools==78.0.2",
+    "wheel==0.45.1",
+] # the setuptools version here should match that of setuptools below in docs in optional-dependencies
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ethereum-execution-spec-tests"
+version = "1.0.0"
+description = "Ethereum execution client test authoring framework"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+keywords = ["ethereum", "testing", "blockchain"]
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.10",
+]
+dependencies = [
+    "click>=8.1.0,<9",
+    "ethereum-execution==1.17.0rc6.dev1",
+    "hive.py @ git+https://github.com/marioevz/hive.py",
+    "ethereum-spec-evm-resolver",
+    "gitpython>=3.1.31,<4",
+    "PyJWT>=2.3.0,<3",
+    "tenacity>8.2.0,<9",
+    "requests>=2.31.0,<3",
+    "requests_unixsocket2>=0.4.0",
+    "colorlog>=6.7.0,<7",
+    "pytest>=8,<9",
+    "pytest-custom-report>=1.0.1,<2",
+    "pytest-html>=4.1.0,<5",
+    "pytest-metadata>=3,<4",
+    "pytest-xdist>=3.3.1,<4",
+    "coincurve>=20.0.0,<21",
+    "trie>=3.1.0,<4",
+    "semver>=3.0.1,<4",
+    "pydantic>=2.10.0,<3",
+    "rich>=13.7.0,<14",
+    "solc-select>=1.0.4,<2",
+    "filelock>=3.15.1,<4",
+    "ethereum-types>=0.2.1,<0.3",
+    "pyyaml>=6.0.2,<7",
+    "types-pyyaml>=6.0.12.20240917,<7",
+    "pytest-json-report>=1.5.0,<2",
+    "typing-extensions>=4.12.2,<5",
+    "questionary>=2.1.0,<3",
+    "ethereum-rlp>=0.1.3,<0.2",
+    "pytest-regex>=0.2.0,<0.3",
+    "eth-abi>=5.2.0",
+    "joblib>=1.4.2",
+]
+
+[project.urls]
+Homepage = "https://github.com/ethereum/execution-spec-tests"
+Documentation = "https://eest.ethereum.org"
+Repository = "https://github.com/ethereum/execution-spec-tests"
+Issues = "https://github.com/ethereum/execution-spec-tests/issues"
+Changelog = "https://eest.ethereum.org/main/CHANGELOG/"
+
+[project.optional-dependencies]
+test = ["pytest-cov>=4.1.0,<5"]
+lint = [
+    "ruff==0.11.8",
+    "mypy>=1.15.0,<1.16",
+    "types-requests>=2.31,<2.33",
+]
+docs = [
+    "cairosvg>=2.7.0,<3",
+    "mike>=1.1.2,<2",
+    "mkdocs>=1.4.3,<2",
+    "mkdocs-click>=0.8,<1",
+    "mkdocs-gen-files>=0.5.0,<1",
+    "mkdocs-git-authors-plugin>=0.7.1,<1",
+    "mkdocs-glightbox>=0.3.4,<1",
+    "mkdocs-literate-nav>=0.6.0,<1",
+    "mkdocs-material>=9.1.14,<10",
+    "mkdocs-material-extensions>=1.1.1,<2",
+    "mkdocstrings>=0.21.2,<1",
+    "mkdocstrings-python>=1.0.0,<2",
+    "pillow>=10.0.1,<11",
+    "pyspelling>=2.8.2,<3",
+    "setuptools==78.0.2",
+]
+
+[project.scripts]
+fill = "cli.pytest_commands.fill:fill"
+phil = "cli.pytest_commands.fill:phil"
+execute = "cli.pytest_commands.execute:execute"
+attac = "cli.pytest_commands.execute:execute"
+checkfixtures = "cli.check_fixtures:check_fixtures"
+check_eip_versions = "cli.pytest_commands.check_eip_versions:check_eip_versions"
+consume = "cli.pytest_commands.consume:consume"
+protec = "cli.pytest_commands.consume:consume"
+genindex = "cli.gen_index:generate_fixtures_index_cli"
+gentest = "cli.gentest:generate"
+eofwrap = "cli.eofwrap:eof_wrap"
+pyspelling_soft_fail = "cli.tox_helpers:pyspelling"
+markdownlintcli2_soft_fail = "cli.tox_helpers:markdownlint"
+order_fixtures = "cli.order_fixtures:order_fixtures"
+evm_bytes = "cli.evm_bytes:evm_bytes"
+hasher = "cli.hasher:main"
+eest = "cli.eest.cli:eest"
+fillerconvert = "cli.fillerconvert.fillerconvert:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+exclude = ["*tests*"]
+
+[tool.pyright]
+exclude = ["tests/static/**"]
+
+[tool.setuptools.package-data]
+ethereum_test_forks = ["forks/contracts/*.bin"]
+"cli.eest.make" = ["templates/*.j2"]
+
+[tool.ruff]
+line-length = 99
+
+[tool.ruff.lint]
+select = ["E", "F", "B", "W", "I", "A", "N", "D", "C"]
+fixable = ["I", "B", "E", "F", "W", "D", "C"]
+ignore = ["D205", "D203", "D212", "D415", "C901", "A005", "C420"]
+
+
+[tool.mypy]
+mypy_path = ["src", "$MYPY_CONFIG_FILE_DIR/stubs"]
+plugins = ["pydantic.mypy"]
+
+[tool.uv.sources]
+ethereum-spec-evm-resolver = { git = "https://github.com/petertdavies/ethereum-spec-evm-resolver", rev = "623ac4565025e72b65f45b926da2a3552041b469" }

@@ -1,0 +1,80 @@
+.DS_Store
+.AppleDouble
+.LSOverride
+
+.python-version
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+
+# Artifacts created by `fill`
+fixtures/
+fixtures-*/
+logs/
+/out/
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# pycharm
+.idea/
+
+*.manifest
+*.spec
+
+pip-log.txt
+pip-delete-this-directory.txt
+
+.tox/
+
+/doc/_autosummary
+
+.coverage
+
+# misc
+*.code-workspace
+verify_kzg_proof
+.vscode/launch.json
+
+# docs
+.cache
+_readthedocs
+site
+venv-docs/
+.pyspelling_en.dict
+
+# cached fixture downloads (consume)
+cached_downloads/
+# pytest report
+assets
+*.html
+
+# Environment
+env.yaml
+
+# Framework logs
+logs/
+
+# Running github actions locally with act
+.act_github_vars
